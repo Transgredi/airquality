@@ -11,5 +11,5 @@ SELECT MAX(ORDINAL_POSITION) FROM information_schema.columns WHERE table_schema 
 SELECT
 	`Kod stacji`, 
 	(SELECT COLUMN_NAME FROM information_schema.columns WHERE table_name = '2000_pm10_24g' AND ORDINAL_POSITION = 2) AS Station, 
-    DsWrocWie 
+    DsWrocWie
 FROM 2000_pm10_24g;
