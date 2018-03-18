@@ -3,11 +3,12 @@ DELETE FROM PM10_24g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania
 DELETE FROM PM25_1g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania');
 DELETE FROM PM25_24g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania');
 
+SELECT Measure_Date, str_to_date(Measure_Date,'%d/%m/%Y %H:%i'), Station_Code FROM PM10_1g_cons LIMIT 1000;
 
 INSERT INTO airquality 
 SELECT 
 	UUID() AS ID, 
-    Measure_Date AS Observation_Date,
+    str_to_date(Measure_Date,'%d/%m/%Y %H:%i') AS Observation_Date,
     Aggregation AS Aggregation,
     NULL AS Year_Number,
     NULL AS Month_Number,
