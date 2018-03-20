@@ -12,14 +12,18 @@ SELECT
     str_to_date(Measure_Date,'%m/%d/%Y %H:%i') AS Observation_Date,
     Aggregation AS Aggregation,
     NULL AS Year_Number,
-    NULL AS Month_Number,
     NULL AS Month_Name,
-    NULL AS Week_Number,
+    NULL AS Month_Number,
     NULL AS Day_Name,
+    NULL AS Day_In_Week,
+    NULL AS Day_In_Month,
+    NULL AS Day_In_Year,
+    NULL AS Week_Number,
     NULL AS City,
     Station_Code AS Station,
     Pollution_Type AS Pollution_Type,
-    ROUND(REPLACE((CASE Pollution_Level WHEN '' THEN NULL ELSE Pollution_Level END), ',', '.'), 4) AS Pollution_Level
+    TRUNCATE(REPLACE((CASE Pollution_Level WHEN '' THEN NULL ELSE Pollution_Level END), ',', '.'), 2) AS Pollution_Level,
+    CURRENT_TIMESTAMP()
 		FROM (
 		SELECT Measure_Date, Station_Code, Pollution_Level, 'PM10' AS Pollution_Type, '1g' AS Aggregation FROM PM10_1g_cons
 		UNION ALL
@@ -33,3 +37,9 @@ SELECT
 
 -- DROP TEMPORARY TABLE PDtemp;
 -- SELECT REPLACE(Pollution_Level, ',', '.') AS PL FROM PDtemp WHERE Pollution_Level LIKE '%,%';
+SELECT MAX(Pollution_Level) FROM DPtemp;
+SELECT * FROM DPtemp ORDER BY Load_Date DESC LIMIT 5000;
+SELECT MIN(Load_Date) FROM DPtemp;
+
+SELECT CURRENT_TIMESTAMP();
+SELECT NOW()
