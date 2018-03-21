@@ -1,9 +1,0 @@
-Dane w katalogach:
-
-- dane_hydrologiczne,
-- dane_meteorologiczne
-
-s¹ danymi historycznymi, w wiêkszoœci zweryfikowanymi, odpowiadaj¹cymi zawartoœci Centralnej Bazy Danych Historycznych.
-
-
-Dane znajduj¹ce siê w pozosta³ych katalogach to dane niezweryfikowane.
