@@ -1,0 +1,38 @@
+Nowe wersje plików:
+
+1. 2018.01.05
+- mies_1982
+- polr_H_1982
+
+zmiany dla stacji Nowosielce na Pielnicy
+
+2. 2018.01.08
+- mies z lat: 1987, 1988, 1989, 1991, 1992, 1993, 1994, 1995, 1997, 1998, 2000, 2001, 2002, 2003, 2009, 2010, 2011 i 2013;
+- polr Q z lat: 1987, 1988, 1989, 1991, 1992, 1993, 1994, 1995, 1997, 2000, 2001, 2002, 2003, 2009 i 2010.
+
+3. 2018.01.11
+- codz_2011
+- mies_2011
+- zjaw_2011
+- polr_2011
+
+zmiany dla stacji Ruda Jastkowska
+
+4. 2018.02.05
+- mies_2001
+- codz_09_2001
+- polr_Q_2001
+
+- dane z roku 1980 - uzupe³nienia stanów wody
+
+5. 2018.02.12
+- dane z lat: 1992, 1993, 1997, 2001, 2002, 2003, 2004, 2009
+zmiany H i Q dla stacji Witowice (151220040)
+
+6. 2018.02.19
+- dane z lat: 1994, 1995, 1996, 1998, 1999, 2000
+zmiany H i Q dla stacji Witowice (151220040)
+
+- dane z roku 1992
+zmiany dla stacji Imio³ki (152170050)
+
