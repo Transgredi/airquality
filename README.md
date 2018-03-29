@@ -13,3 +13,4 @@
 3. Load CSV to the DB
 4. Merge staging tables into tables by pollution type and time granulation
 5. Merge all data into one final table
+6. Load metadata for monitoring stations
