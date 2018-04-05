@@ -1363,3 +1363,5 @@ UNION ALL SELECT `Kod stacji` AS Measure_Date, 'ZpKoszArKraj' AS Station_Code, `
 UNION ALL SELECT `Kod stacji` AS Measure_Date, 'ZpSzczAndr01' AS Station_Code, `ZpSzczAndr01` AS Pollution_Level FROM 2016_pm10_1g
 UNION ALL SELECT `Kod stacji` AS Measure_Date, 'ZpSzczecPrze' AS Station_Code, `ZpSzczecPrze` AS Pollution_Level FROM 2016_pm10_1g
 UNION ALL SELECT `Kod stacji` AS Measure_Date, 'ZpSzczLacz04' AS Station_Code, `ZpSzczLacz04` AS Pollution_Level FROM 2016_pm10_1g;
+
+
