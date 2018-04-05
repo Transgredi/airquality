@@ -16,5 +16,4 @@
 6. Load metadata for monitoring stations
 
 
-
 ![Data flow](data_flow_overview.png)
