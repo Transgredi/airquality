@@ -1,7 +1,7 @@
--- DELETE FROM PM10_1g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
--- DELETE FROM PM10_24g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
--- DELETE FROM PM25_1g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
--- DELETE FROM PM25_24g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
+DELETE FROM PM10_1g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
+DELETE FROM PM10_24g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
+DELETE FROM PM25_1g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
+DELETE FROM PM25_24g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
 
 -- SELECT Measure_Date, str_to_date(Measure_Date,'%d/%m/%Y %H:%i'), Station_Code FROM PM10_1g_cons LIMIT 1000;
 
@@ -35,11 +35,6 @@ SELECT
 		) PD WHERE Measure_Date != '';
         
 
--- DROP TEMPORARY TABLE PDtemp;
--- SELECT REPLACE(Pollution_Level, ',', '.') AS PL FROM PDtemp WHERE Pollution_Level LIKE '%,%';
-SELECT MAX(Pollution_Level) FROM DPtemp;
-SELECT * FROM DPtemp ORDER BY Load_Date DESC LIMIT 5000;
-SELECT MIN(Load_Date) FROM DPtemp;
 
-SELECT CURRENT_TIMESTAMP();
-SELECT NOW()
+UPDATE airquality SET Aggregation = '24h' WHERE Aggregation = '24g';
+UPDATE airquality SET Aggregation = '1h' WHERE Aggregation = '1g';
