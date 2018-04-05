@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 DROP TABLE IF EXISTS airquality;
 CREATE TABLE airquality (
 	uid UUID NOT NUL DEFAULT uuid_generate_v4(),
@@ -6,7 +8,8 @@ CREATE TABLE airquality (
 	pollution_type VARCHAR(6) NULL,
 	granulation VARCHAR(3) NULL,
 	pollution FLOAT NULL
-);CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+);
+
 
 DROP TABLE IF EXISTS station_metadata;
 CREATE TABLE station_metadata (
@@ -27,7 +30,6 @@ CREATE TABLE station_metadata (
 	latitude varchar(10) NULL,
 	longitude varchar(15) NULL
 );
-
 
 
 DROP TABLE IF EXISTS post_metadata;
