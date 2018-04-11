@@ -1,31 +1,17 @@
-DELETE FROM PM10_1g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
-DELETE FROM PM10_24g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
-DELETE FROM PM25_1g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
-DELETE FROM PM25_24g_cons WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
+DELETE FROM pollution_staging WHERE Measure_Date IN ('Wskaźnik', 'Czas uśredniania', 'Czas pomiaru');
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 TRUNCATE airquality;
-INSERT INTO airquality;
+
+BEGIN;
+INSERT INTO airquality
 SELECT 
-	uuid_generate_v4() AS uid, 
-    str_to_date(Measure_Date,'%m/%d/%Y %H:%i') AS observation_date,
-    Aggregation AS granulation,
-    Station_Code AS station_code,
-    Pollution_Type AS pollution_type,
-    TRUNCATE(REPLACE((CASE Pollution_Level WHEN '' THEN NULL ELSE Pollution_Level END), ',', '.'), 2) AS pollution
-		FROM (
-		SELECT Measure_Date, Station_Code, Pollution_Level, 'PM10' AS Pollution_Type, '1g' AS Aggregation FROM PM10_1h_cons
-		UNION ALL
-		SELECT Measure_Date, Station_Code, Pollution_Level, 'PM10' AS Pollution_Type, '24g' AS Aggregation FROM PM10_24h_cons
-		UNION ALL
-		SELECT Measure_Date, Station_Code, Pollution_Level, 'PM2.5' AS Pollution_Type, '1g' AS Aggregation FROM PM25_1h_cons
-		UNION ALL
-		SELECT Measure_Date, Station_Code, Pollution_Level, 'PM2.5' AS Pollution_Type, '24g' AS Aggregation FROM PM25_24h_cons
-		) PD WHERE Measure_Date != '';
-        
-
-
-UPDATE airquality SET Aggregation = '24h' WHERE Aggregation = '24g';
-UPDATE airquality SET Aggregation = '1h' WHERE Aggregation = '1g';
-
-
-SELECT uuid_generate_v4();
+	uuid_generate_v4() AS uid,
+	to_timestamp(Measure_Date, 'MM/DD/YYYY HH24:SS') AS observation_date,
+	station_code,
+	CASE WHEN "source" LIKE '%PM10%' THEN 'PM10' ELSE 'PM2.5' END AS pollution_type,
+	CASE WHEN "source" LIKE '%24g%' THEN '24h' ELSE '1h' END AS granulation,
+	REPLACE(CASE WHEN pollution_level = '' THEN NULL ELSE pollution_level END, ',', '.')::float8 AS pollution
+FROM pollution_staging;
+COMMIT;
