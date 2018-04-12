@@ -10,14 +10,8 @@ FROM station_metadata
 WHERE status = 'aktywny';
 
 
-DROP VIEW IF EXISTS PM_Wro;
-CREATE VIEW PM_Wro AS
-SELECT * FROM airquality 
-WHERE station_code IN (SELECT lower(code) FROM station_metadata WHERE city = 'Wrocław');
-
-
-DROP VIEW IF EXISTS airquality_pm10_1h;
-CREATE VIEW airquality_pm10_1h AS
+DROP MATERIALIZED VIEW IF EXISTS airquality_pm10_1h;
+CREATE MATERIALIZED VIEW airquality_pm10_1h AS
 SELECT 
 	a.observation_date,
 	TO_CHAR(a.observation_date, 'YYYY') AS "year",
@@ -40,8 +34,8 @@ WHERE
 ORDER BY a.observation_date;
 
 
-DROP VIEW IF EXISTS airquality_pm10_24h;
-CREATE VIEW airquality_pm10_24h AS
+DROP MATERIALIZED VIEW IF EXISTS airquality_pm10_24h;
+CREATE MATERIALIZED VIEW airquality_pm10_24h AS
 SELECT 
 	a.observation_date,
 	TO_CHAR(a.observation_date, 'YYYY') AS "year",
@@ -64,8 +58,8 @@ WHERE
 ORDER BY a.observation_date;
 
 
-DROP VIEW IF EXISTS airquality_pm25_1h;
-CREATE VIEW airquality_pm25_1h AS
+DROP MATERIALIZED VIEW IF EXISTS airquality_pm25_1h;
+CREATE MATERIALIZED VIEW airquality_pm25_1h AS
 SELECT 
 	a.observation_date,
 	TO_CHAR(a.observation_date, 'YYYY') AS "year",
@@ -88,8 +82,8 @@ WHERE
 ORDER BY a.observation_date;
 
 
-DROP VIEW IF EXISTS airquality_pm25_24h;
-CREATE VIEW airquality_pm25_24h AS
+DROP MATERIALIZED VIEW IF EXISTS airquality_pm25_24h;
+CREATE MATERIALIZED VIEW airquality_pm25_24h AS
 SELECT 
 	a.observation_date,
 	TO_CHAR(a.observation_date, 'YYYY') AS "year",
@@ -115,9 +109,15 @@ ORDER BY a.observation_date;
 
 /* 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * SEPARATE VIEWS FOR EACH GRANULATION AND POLLUTION TYPE FOR WROCLAW ONLY
+ * SEPARATE VIEWS FOR WROCLAW ONLY
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  */
+
+DROP MATERIALIZED VIEW IF EXISTS PM_Wro;
+CREATE MATERIALIZED VIEW PM_Wro AS
+SELECT * FROM airquality 
+WHERE station_code IN (SELECT lower(code) FROM station_metadata WHERE city = 'Wrocław');
+
 
 DROP VIEW IF EXISTS PM_Wro_PM10_1h;
 CREATE VIEW PM_Wro_PM10_1h AS
